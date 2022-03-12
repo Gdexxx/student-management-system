@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-right: 50px;padding-left: 80px;">
+    <div class="container-fluid">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item " aria-current="page">Home</li>
+          <li class="breadcrumb-item " aria-current="page">Faculty</li>
+          <li class="breadcrumb-item active" aria-current="page">Manage-Faculty</li>
+        </ol>
+      </nav>
+    </div>
+  </nav>
+
+
+
+  <div class="container mt-5" >
+    <form class="row g-3" [formGroup]="facultyForm">
+      <div class="col-auto">
+        <input type="text" class="form-control" placeholder="eg. Natural-Sciences"formControlName="name">
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-success mb-3" (click)="addfaculty()">Submit</button>
+      </div>
+    </form>
+    <div class="row" >
+       <div class="col-12">
+          <table class="table table-striped table-bordered" >
+             <thead>
+                <tr>
+                   <th scope="col">#</th>
+                   <th scope="col">Faculty</th>
+                   <th scope="col">Date Created</th>
+                   
+                   <th scope="col">Actions</th>
+                </tr>
+             </thead>
+             <tbody>
+                <tr *ngFor="let list of faculty;let i=index">
+                   <th scope="row">{{i+1}}</th>
+                   <td>{{list?.name}}</td>
+                   <td>{{list?.dateCreated|date}}</td>
+                   
+                   <td>
+                      
+                      
+                      <button type="button" class="btn btn-danger floated" (click)="deleteFaculty(list)"><i class="far fa-trash-alt"></i></button>
+                   </td>
+                </tr>
+                
+              
+             </tbody>
+          </table>
+       </div>
+    </div>
+ </div>

@@ -1,0 +1,139 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-right: 50px;padding-left: 80px;">
+    <div class="container-fluid">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item " aria-current="page">Home</li>
+          <li class="breadcrumb-item " aria-current="page">Course</li>
+          <li class="breadcrumb-item active" aria-current="page">Manage-Course</li>
+        </ol>
+      </nav>
+    </div>
+  </nav>
+
+  <div class="container mt-5" >
+    
+    <form class="row" [formGroup]="courseform">
+      <div class="col">
+      <select class="form-select" aria-label="Default select example"formControlName="dept">
+        <option selected>Select Department</option>
+        <option *ngFor="let list of dept;let i=index">{{list?.name}}</option>
+      </select>
+    </div>
+      <div class="col">
+        <label for="input Course" class="visually-hidden">CourseCode</label>
+        <input type="text" class="form-control"  placeholder="eg. CSE407" formControlName="courseCode">
+      </div>
+      <div class="col">
+        <label for="input Course" class="visually-hidden">CourseTitle</label>
+        <input type="text" class="form-control"  placeholder="eg. Netcentric Comput" formControlName="courseTitle">
+      </div>
+      <div class="col">
+        <select class="form-select" aria-label="Default select example"formControlName="creditUnit">
+          <option selected>Select CreditUnit</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+      <div class="col">
+        <select class="form-select" aria-label="Default select example"formControlName="semester">
+          <option selected>Select Semester</option>
+          <option value="1st Semester">1st Semester</option>
+          <option value="2nd Semester">2nd Semester</option>
+        </select>
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-block btn-success mb-3" (click)="coursesubmit()">Submit</button>
+      </div>
+    </form>
+    <div class="row-3" >
+       <div class="col-12">
+          <table class="table table-striped table-bordered" >
+             <thead>
+                <tr>
+                   <th scope="col">#</th>
+                   <th scope="col">Course Code</th>
+                   <th scope="col">Course Title</th>
+                   <th scope="col">Date Created</th>
+                   <th scope="col">Department</th>
+                   <th scope="col">Credit Unit</th>
+                   <th scope="col">Semester</th>
+                   <th scope="col">Date Created</th>
+                   <th scope="col">Actions</th>
+                </tr>
+             </thead>
+             <tbody>
+                <tr *ngFor="let list of courseList; let i=index">
+                   <th scope="row-12">{{i+1}}</th>
+                   <td>{{list?.courseCode}}</td>
+                   <td>{{list?.courseTitle}}</td>
+                   <td>{{list?.dateCreated}}</td>
+                   <td>{{list?.dept.name}}</td>
+                   <td>{{list?.creditUnit}}</td>
+                   <td>{{list?.semester}}</td>
+                   <td>{{list?.dateCreated}}</td>
+                   
+                   
+                   <td>
+                      
+                      <button (click)="coursedet(list)" type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter" style="margin-right: 20px;"><i class="fa fa-info-circle"></i></button>
+                      <button type="button" class="btn btn-danger" (click)="deleteCou(list)"><i class="far fa-trash-alt"></i></button>
+                   </td>
+                </tr>
+         
+            
+             </tbody>
+          </table>
+       </div>
+    </div>
+ </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Course Description</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="float: right;">
+          <div class="container">
+            <h6>12th August, 2021</h6>
+          </div>
+        </div>
+
+        <div class="container mt-5">
+            <div class="card card-body " style="background-color: rgb(219, 219, 219);">
+              <p class="mt-2">
+                CourseCode : <strong>{{CourseDetails?.courseCode}}</strong>
+              </p> 
+              <p>
+                CourseTitle: <strong>{{CourseDetails?.courseTitle}}</strong>
+              </p> 
+              <p>
+                CreditUnit: <strong>{{CourseDetails?.creditUnit}}</strong>
+              </p> 
+              <p>
+                Department: <strong>{{CourseDetails?.dept?.name}}</strong>
+              </p> 
+              <p>
+                Semester : <strong>{{CourseDetails?.semester}}</strong>
+              </p> 
+            </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
